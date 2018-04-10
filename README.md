@@ -1,6 +1,8 @@
 # vue-score-board
 
-> A Vue.js project
+</center><img src="https://github.com/thomijasir/vue-score-board/blob/master/screenshoot.png"/></center>
+
+> Application for excercise how comunication works on looping child to parent parent to child on vue compoentn
 
 ## Build Setup
 
