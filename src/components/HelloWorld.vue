@@ -15,7 +15,7 @@
 					<td>{{item.id}}</td>
 					<td>{{item.name}}</td>
 					<td><Counter :id="item.id" :funcUpdate="updateScore"/></td>
-					<td>{{item.score}}</td>
+					<td>{{item.score * item.winstreak}}</td>
 				</tr>
 				<tr v-show="addPlayerActive">
 					<td><input type="number" placeholder="Enter ID" v-model="idPlayer"></td>
@@ -62,28 +62,32 @@ export default {
 					id: 1,
 					name: 'Thomi',
 					score: 120,
+					winstreak: 1,
 				},
 				{
 					id: 2,
 					name: 'Bobby',
 					score: 335,
+					winstreak: 1,
 				},
 				{
 					id: 3,
 					name: 'Farhan',
 					score: 780,
+					winstreak: 1,
 				},
 				{
 					id: 4,
 					name: 'Rozi',
 					score: 450,
+					winstreak: 1,
 				},
 			]
 		}
 	},
 	computed:{
 		totalScores(){
-			const getScore = this.person.map(el => el.score).reduce((a, b) => a + b, 0);
+			const getScore = this.person.map(el => el.score * el.winstreak).reduce((a, b) => a + b, 0);
 			return getScore
 		}
 	},
@@ -95,6 +99,7 @@ export default {
 					id: this.idPlayer,
 					name: this.namePlayer,
 					score: parseInt(this.currentScore),
+					winstreak: 1,
 				}
 				this.person.push(newPlayerObject)
 				console.log('Person Data: ', this.person)
@@ -114,8 +119,8 @@ export default {
 			const items = this.person.map(element => element.id)
 			const index = items.indexOf(value.idCounter);
 			if (~index) {
-				const multiply = this.person[index].score * value.valCounter
-				this.person[index].score = multiply;
+				// const multiply = this.person[index].score * value.valCounter
+				this.person[index].winstreak = value.valCounter;
 			}
 			console.log('GET index ', index)
 		}
